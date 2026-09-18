@@ -1,0 +1,26 @@
+.env
+.env.*
+!.env.example
+*.session
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+
+# Runtime data and user media
+assets/*.mp4
+assets/source_bank/
+assets/curated_source_bank/
+assets/stock_sources/
+assets/stock/
+assets/SOURCE_BANK_LICENSES.json
+assets/CURATED_SOURCE_BANK.json
+data/
+logs/
+*.log
+
+# Local build and deployment artifacts
+.venv/
+dist/
+build/
+*.tar

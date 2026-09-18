@@ -1,0 +1,33 @@
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - redis
+    volumes:
+      - uniqueizer_data:/data
+    command: ["python", "-m", "uniqueizer.bot"]
+
+  worker:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - redis
+    volumes:
+      - uniqueizer_data:/data
+    command: ["python", "-m", "uniqueizer.worker"]
+    deploy:
+      replicas: 1
+
+volumes:
+  redis_data:
+  uniqueizer_data:

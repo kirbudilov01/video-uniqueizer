@@ -17,6 +17,30 @@ the left or right panel, and randomly mirrors the satisfying panel. The
 source bank is supplied separately by the operator and is never committed to
 this repository.
 
+## Run Without Telegram
+
+The rendering core can run as a local CLI. Telegram, Redis, and a bot token are
+not needed for this path.
+
+```bash
+python -m uniqueizer.cli ./input.mp4 \
+  --mode standard \
+  --copies 3 \
+  --output ./output
+```
+
+For satisfying mode, provide a local asset directory containing the generated
+background pack and a project-owned `curated_source_bank`:
+
+```bash
+python scripts/build_assets.py ./assets
+python -m uniqueizer.cli ./input.mp4 \
+  --mode satisfying \
+  --asset-dir ./assets \
+  --copies 3 \
+  --output ./output
+```
+
 Users choose a mode before each upload. Default access allows all Telegram
 users, but limits active jobs per user.
 
